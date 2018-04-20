@@ -78,3 +78,10 @@ So, when posting a new employee please use the form:
 
 Where `"http://0.0.0.0:8000/department/1/"` is the full path to the department record.
 These records are also integrated with the Django Admin page.
+
+The project is using SQLite to simplify the solution. To make the database persistent, please use docker volumes when starting the image:
+
+```bash
+docker run -p 8000:8000 -v local_path_to_your_data
+ :/data/db.sqlite3 employeeManager:v1
+```
