@@ -1,4 +1,4 @@
-from rest_framework import serializers, viewsets
+from rest_framework import permissions, serializers, viewsets
 from .models import Department, Employee
 
 
@@ -9,11 +9,13 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class EmployeeViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
 
 class DepartmentSerializer(serializers.HyperlinkedModelSerializer):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     class Meta:
         model = Department
         fields = ['pk','name']
