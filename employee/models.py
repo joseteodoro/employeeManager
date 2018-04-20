@@ -13,11 +13,5 @@ class Employee(models.Model):
     email = models.EmailField(verbose_name="Email")
     department = models.ForeignKey(Department, on_delete=models.PROTECT, verbose_name="Department")
 
-    def by_department(self, department):
-        return Employee.objects.filter(department__name=department)
-
-    def by_name(self, name):
-        return Employee.objects.filter(*name)
-
     def __str__(self):
         return "{} of {}".format(self.name, self.department)
