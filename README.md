@@ -9,7 +9,7 @@ For docker use:
 
 ```bash
 cd 'PATH_TO_PROJECT'
-docker build . --tag employeeManager:lastest
+docker build . --tag employeeManager:v1
 docker run -p 8000:8000 employeeManager:v1
 ```
 
