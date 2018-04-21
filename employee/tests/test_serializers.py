@@ -1,7 +1,18 @@
-#EmployeeSerializer's  test
+from ..serializers import DepartmentSerializer, EmployeeSerializer
+from ..models import Department, Employee
+from django.test import TestCase
 
-#EmployeeViewSet's  test
+class SerializerTest(TestCase):
+    """ Test module for Department serializer """
 
-#DepartmentSerializer's  test
+    def setUp(self):
+        self.hauting = Department(name='hauting')
+        self.hauting.save()
 
-#DepartmentViewSet's  test
+    def test_department_serializer(self):
+        serializer = DepartmentSerializer(self.hauting)
+        serialized = {'pk': 1, 'name': 'hauting'}
+        self.assertEqual(serializer.data, serialized)
+
+    def tearDown(self):
+        self.hauting.delete()

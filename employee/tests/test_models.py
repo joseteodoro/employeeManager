@@ -30,14 +30,11 @@ class EmployeeTest(TestCase):
 
 class EmployeeListCreateAPIViewTest(APITestCase):
 
-    def setUp(self):
-        self.client.login(username="test", password="test")
-
     def test_emptyList(self):
         url = reverse("employee")
         response = self.client.get(url)
-        self.assertEqual(200, response.status_code)
-        self.assertEqual([], json.loads(response.content))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content), [])
 
     def test_nonEmptyList(self):
         hauting = Department(name='hauting')
@@ -48,11 +45,11 @@ class EmployeeListCreateAPIViewTest(APITestCase):
 
         url = reverse("employee")
         response = self.client.get(url)
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(response.status_code, 200)
         expected_json = [{'department': 'http://testserver/department/1/',
                          'email': 'casper@hotmail.com',
                          'name': 'Casper'}]
-        self.assertEqual(expected_json, json.loads(response.content))
+        self.assertEqual(json.loads(response.content), expected_json)
 
         casper.delete()
         hauting.delete()
